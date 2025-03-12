@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Référencement de Marques</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Référencement de Marques</h1>
+    </header>
+    <main>
+        <section id="search">
+            <input type="text" id="searchInput" placeholder="Recherchez une marque..." />
+            <button id="searchButton">Rechercher</button>
+        </section>
+        <section id="brandList">
+            <h2>Liste des Marques</h2>
+            <ul id="brands"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Référencement de Marques</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#search input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#search button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#brandList {
+    margin: 20px;
+    text-align: center;
+}
+
+#brands {
+    list-style-type: none;
+    padding: 0;
+}
+
+#brands li {
+    margin: 10px 0;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+const brands = [
+    { name: "Nike", description: "Marque de sport célèbre pour ses chaussures et vêtements." },
+    { name: "Apple", description: "Leader en technologie et créateur de l'iPhone." },
+    { name: "Coca-Cola", description: "Boisson gazeuse mondialement connue." }
+];
+
+const brandList = document.getElementById("brands");
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getElementById("searchButton");
+
+function displayBrands(filter = "") {
+    brandList.innerHTML = "";
+    const filteredBrands = brands.filter(brand =>
+        brand.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    filteredBrands.forEach(brand => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${brand.name}</strong><br>${brand.description}`;
+        brandList.appendChild(li);
+    });
+}
+
+searchButton.addEventListener("click", () => {
+    const searchTerm = searchInput.value;
+    displayBrands(searchTerm);
+});
+
+// Affiche toutes les marques au chargement
+displayBrands();
